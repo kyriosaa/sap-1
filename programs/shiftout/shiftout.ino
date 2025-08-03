@@ -1,4 +1,4 @@
-// SAP-1 8-bit computer EEPROM Programmer
+// sample shiftOut code
 // Arduino Nano
 
 #define SHIFT_DATA  2
@@ -20,7 +20,11 @@ void setup() {
   pinMode(SHIFT_CLK, OUTPUT);
   pinMode(SHIFT_LATCH, OUTPUT);
 
-  setAddress(1234, false);
+  digitalWrite(SHIFT_LATCH, LOW);
+  digitalWrite(SHIFT_LATCH, HIGH);
+  digitalWrite(SHIFT_LATCH, LOW);
+
+  setAddress(1234, true);
 }
 
 void loop() {
