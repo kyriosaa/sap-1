@@ -9,8 +9,8 @@ SAP-1 (Simple As Possible - 1) is a fully functional 8-bit computer built entire
 
 The computer works without any code and can be manually programmed by using DIP switches and Arduino code is used to program EEPROM lookup tables so numbers can be displayed properly. More complex programs such as multiplication or sequencing are written in Assembly and manually entered via DIP switches.
 
-| Sections |  |
-|---------|------|
+| Sections  |
+|-----------|
 | 🔧 [Core Components](#core-components) |
 | 📊 [Instruction Set](#instruction-set) |
 | ⚡ [Operation Cycle](#operation-cycle) |
