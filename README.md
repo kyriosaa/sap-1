@@ -9,6 +9,14 @@ SAP-1 (Simple As Possible - 1) is a fully functional 8-bit computer built entire
 
 The computer works without any code and can be manually programmed by using DIP switches and Arduino code is used to program EEPROM lookup tables so numbers can be displayed properly. More complex programs such as multiplication or sequencing are written in Assembly and manually entered via DIP switches.
 
+| Sections |  |
+|---------|------|
+| 🔧 [Core Components](#core-components) |
+| 📊 [Instruction Set](#instruction-set) |
+| ⚡ [Operation Cycle](#operation-cycle) |
+| 💻 [Programming](#programming) |
+| 📸 [Images](#this-project-is-not-finished-yet-but-here-are-some-wip-images) |
+
 ## Core Components
 
 **CPU Architecture**
@@ -22,6 +30,8 @@ The computer works without any code and can be manually programmed by using DIP 
 - **16-byte RAM -** Stores both the program instructions and data
 - **4-bit address -** Can access 16 memory locations (can store either instructions or data)
 - **7-segment display -** Decimal display for output
+- **Clock control -** Includes a potentiometer for controlling clock speed along with the option to set the clock to automatic or manual
+- **Reset button -** Includes a button to reset the computer and rerun any loaded programs
 - **Control switches -** Includes DIP switches and buttons for manual programming
 
 ## Instruction Set
@@ -53,13 +63,13 @@ I've programmed a complete instruction set in the [CPU microcode](./programs/sap
 - [Arduino EEPROM programmers](./programs/sap1_decimal_counter_programmer/sap1_decimal_counter_programmer.ino) are used to prepare lookup tables for decoding the 7-segment display
 
 **Example Programs**
-- I put the [Assembly examples](./programs/assembly/) in the Assembly folder
+- [Assembly examples](./programs/assembly/) are in the Assembly folder
 
 <!-- 🎥 [Watch the demo video](LINK) 🎥 -->
 
 ## This project is not finished yet, but here are some WIP images
 
-<img src='/images/sap-1.jpg'>
+<img src='./images/sap-1.jpg'>
 <img src='./images/clock.jpeg'>
 <img src='./images/alu.jpeg'>
 <img src='./images/instruction_reg.jpeg'>
