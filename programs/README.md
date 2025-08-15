@@ -1,1 +1,3 @@
-EEPROM Programs
+## EEPROM Program Instructions
+
+Visit assembly folder for CPU instructions
