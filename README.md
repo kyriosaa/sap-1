@@ -1,3 +1,5 @@
+<img src='./images/display.JPG'>
+
 # SAP-1 8-bit Breadboard Computer
 
 [![Assembly](https://img.shields.io/badge/Assembly-525252?style=flat&logo=assemblyscript&logoColor=white)](https://en.wikipedia.org/wiki/Assembly_language)
@@ -26,6 +28,7 @@ The computer works without any code and can be manually programmed by using DIP 
 - **Instruction Register -** Stores the current instruction being executed
 - **Flags Register -** Checks for overflow or underflow values
 - **Program Counter -** Keeps track of which instruction to execute next
+- **EEPROM Programmer -** For CPU microcode & display programming
 
 **Memory & I/O**
 - **16-byte RAM -** Stores both the program instructions and data
@@ -84,9 +87,12 @@ Jump to address 3:           0110 0011
 
 <!-- 🎥 [Watch the demo video](LINK) 🎥 -->
 
-## This project is not finished yet, but here are some WIP images
+## Images
 
-<img src='./images/sap-1.jpg'>
-<img src='./images/clock.jpeg'>
-<img src='./images/alu.jpeg'>
-<img src='./images/instruction_reg.jpeg'>
+<img src='./images/sap1.JPG'>
+<img src='./images/control_word.JPG'>
+<img src='./images/eeproms.JPG'>
+<img src='./images/programmer2.JPG'>
+<img src='./images/display_side.JPG'>
+<img src='./images/ic.JPG'>
+<img src='./images/program_counter.JPG'>

@@ -1,11 +1,18 @@
 ; Displays powers of 2
 
-LDI 1   ; Load immediate 1      (0000   0101 0001)
-OUT     ; Output                (0001   1110 0000)
-STA 15  ; Store number          (0010   0100 1111)
-ADD 15  ; Add value to itself   (0011   0010 1111)
-OUT     ; Output                (0100   1110 0000)
-STA 15  ; Store sum             (0101   0100 1111)
-JMP 3   ; Jump to address 3     (0110   0110 0011)
-
-; Address 15: current power of 2
+LDI 1   ; Load immediate 1              00: (0000   0101 0001)
+OUT     ; Output                        01: (0001   1110 0000)
+STA 15  ; Store number                  02: (0010   0100 1111)
+ADD 15  ; Add value to itself           03: (0011   0010 1111)
+OUT     ; Output                        04: (0100   1110 0000)
+JC  8   ; If carry, jump to addr 8      05: (0101   0111 1000)
+STA 15  ; Store sum                     06: (0110   0100 1111)
+JMP 3   ; Jump to address 3             07: (0111   0110 0011)
+HLT     ; Halt                          08: (1000   1111 0000)
+        ;                               09: (1001            )
+        ;                               10: (1010            )
+        ;                               11: (1011            )
+        ;                               12: (1100            )
+        ;                               13: (1101            )
+        ;                               14: (1110            )
+        ; Current number                15: (1111   0000 0000)

@@ -1,4 +1,4 @@
-; Adds 15 until overflow, then subtracts 15 until underflow - repeat
+; Adds until overflow, then subtracts until underflow - repeat
 
 OUT     ; Output                        00: (0000   1110 0000)
 ADD 15  ; Add using addr 15             01: (0001   0010 1111)
@@ -15,4 +15,4 @@ JMP 4   ; Jump to addr 4                07: (0111   0110 0100)
         ;                               12: (1100            )
         ;                               13: (1101            )
         ;                               14: (1110            )
-        ;                               15: (1111            ) input
+        ; Add/Sub number                15: (1111   0000 0000) INPUT

@@ -1,12 +1,18 @@
 ; Counts down from 10 to 0
 
-LDI 10  ; Load immediate 10     (0000   0101 1010)
-OUT     ; Output                (0001   1110 0000)
-SUB 15  ; Subtract 1            (0010   0011 1111)
-OUT     ; Output                (0011   1110 0000)
-STA 14  ; Store result          (0100   0100 1110)
-LDA 14  ; Load result           (0101   0001 1110)
-JMP 2   ; Jump to address 2     (0110   0110 0010)
-
-; Address 14: current number
-; Address 15: 1 (constant)
+LDI 10  ; Load immediate 10         00: (0000   0101 1010)
+OUT     ; Output                    01: (0001   1110 0000)
+SUB 15  ; Subtract 1                02: (0010   0011 1111)
+OUT     ; Output                    03: (0011   1110 0000)
+JZ  8   ; If zero, jump to addr 8   04: (0100   1000 1000)
+STA 14  ; Store result              05: (0101   0100 1110)
+LDA 14  ; Load result               06: (0110   0001 1110)
+JMP 2   ; Jump to address 2         07: (0111   0110 0010)
+HLT     ; Halt                      08: (1000   1111 0000)
+        ;                           09: (1001            )
+        ;                           10: (1010            )
+        ;                           11: (1011            )
+        ;                           12: (1100            )
+        ;                           13: (1101            )
+        ; Current number            14: (1110   0000 0000)
+        ; 1 (constant)              15: (1111   0000 0001) 
