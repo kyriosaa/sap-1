@@ -1,4 +1,4 @@
-// SAP-1 8-bit computer EEPROM Microcode Programmer
+// SAP-1 8-bit computer EEPROM Microcode Programmer (without flags)
 // Arduino Nano
 
 #define SHIFT_DATA  2
@@ -23,55 +23,26 @@
 #define OI  0b0000000000010000  // Output register In
 #define CE  0b0000000000001000  // Counter Enable
 #define CO  0b0000000000000100  // Counter Out
-#define J   0b0000000000000010  // Jump (counter in)
-#define FI  0b0000000000000001  // Flags In
+#define J   0b0000000000000010  // Jump
 
-#define FLAGS_Z0C0  0
-#define FLAGS_Z0C1  1
-#define FLAGS_Z1C0  2
-#define FLAGS_Z1C1  3
-
-#define JC  0b0111
-#define JZ  0b1000
-
-const PROGMEM uint16_t UCODE_TEMPLATE[16][8] = {
-  { MI|CO, RO|II|CE, 0,       0,      0,            0, 0, 0 },  // 0000 - NOP
-  { MI|CO, RO|II|CE, IO|MI,   RO|AI,  0,            0, 0, 0 },  // 0001 - LDA
-  { MI|CO, RO|II|CE, IO|MI,   RO|BI,  EO|AI|FI,     0, 0, 0 },  // 0010 - ADD
-  { MI|CO, RO|II|CE, IO|MI,   RO|BI,  EO|AI|SU|FI,  0, 0, 0 },  // 0011 - SUB
-  { MI|CO, RO|II|CE, IO|MI,   AO|RI,  0,            0, 0, 0 },  // 0100 - STA
-  { MI|CO, RO|II|CE, IO|AI,   0,      0,            0, 0, 0 },  // 0101 - LDI
-  { MI|CO, RO|II|CE, IO|J ,   0,      0,            0, 0, 0 },  // 0110 - JMP
-  { MI|CO, RO|II|CE, 0,       0,      0,            0, 0, 0 },  // 0111 - JC
-  { MI|CO, RO|II|CE, 0,       0,      0,            0, 0, 0 },  // 1000 - JZ
-  { MI|CO, RO|II|CE, 0,       0,      0,            0, 0, 0 },  // 1001
-  { MI|CO, RO|II|CE, 0,       0,      0,            0, 0, 0 },  // 1010
-  { MI|CO, RO|II|CE, 0,       0,      0,            0, 0, 0 },  // 1011
-  { MI|CO, RO|II|CE, 0,       0,      0,            0, 0, 0 },  // 1100
-  { MI|CO, RO|II|CE, 0,       0,      0,            0, 0, 0 },  // 1101
-  { MI|CO, RO|II|CE, AO|OI,   0,      0,            0, 0, 0 },  // 1110 - OUT
-  { MI|CO, RO|II|CE, HLT,     0,      0,            0, 0, 0 },  // 1111 - HLT
+uint16_t data[] = {
+  MI|CO, RO|II|CE, 0,       0,      0,        0, 0, 0,  // 0000 - NOP
+  MI|CO, RO|II|CE, IO|MI,   RO|AI,  0,        0, 0, 0,  // 0001 - LDA
+  MI|CO, RO|II|CE, IO|MI,   RO|BI,  EO|AI,    0, 0, 0,  // 0010 - ADD
+  MI|CO, RO|II|CE, IO|MI,   RO|BI,  EO|AI|SU, 0, 0, 0,  // 0011 - SUB
+  MI|CO, RO|II|CE, IO|MI,   AO|RI,  0,        0, 0, 0,  // 0100 - STA
+  MI|CO, RO|II|CE, IO|AI,   0,      0,        0, 0, 0,  // 0101 - LDI
+  MI|CO, RO|II|CE, IO|J ,   0,      0,        0, 0, 0,  // 0110 - JMP
+  MI|CO, RO|II|CE, 0,       0,      0,        0, 0, 0,  // 0111
+  MI|CO, RO|II|CE, 0,       0,      0,        0, 0, 0,  // 1000
+  MI|CO, RO|II|CE, 0,       0,      0,        0, 0, 0,  // 1001
+  MI|CO, RO|II|CE, 0,       0,      0,        0, 0, 0,  // 1010
+  MI|CO, RO|II|CE, 0,       0,      0,        0, 0, 0,  // 1011
+  MI|CO, RO|II|CE, 0,       0,      0,        0, 0, 0,  // 1100
+  MI|CO, RO|II|CE, 0,       0,      0,        0, 0, 0,  // 1101
+  MI|CO, RO|II|CE, AO|OI,   0,      0,        0, 0, 0,  // 1110 - OUT
+  MI|CO, RO|II|CE, HLT,     0,      0,        0, 0, 0,  // 1111 - HLT
 };
-
-uint16_t ucode[4][16][8];
-
-void initUCode() {
-  // ZF = 0, CF = 0
-  memcpy_P(ucode[FLAGS_Z0C0], UCODE_TEMPLATE, sizeof(UCODE_TEMPLATE));
-
-  // ZF = 0, CF = 1
-  memcpy_P(ucode[FLAGS_Z0C1], UCODE_TEMPLATE, sizeof(UCODE_TEMPLATE));
-  ucode[FLAGS_Z0C1][JC][2] = IO|J;
-
-  // ZF = 1, CF = 0
-  memcpy_P(ucode[FLAGS_Z1C0], UCODE_TEMPLATE, sizeof(UCODE_TEMPLATE));
-  ucode[FLAGS_Z1C0][JZ][2] = IO|J;
-
-  // ZF = 1, CF = 1
-  memcpy_P(ucode[FLAGS_Z1C1], UCODE_TEMPLATE, sizeof(UCODE_TEMPLATE));
-  ucode[FLAGS_Z1C1][JC][2] = IO|J;
-  ucode[FLAGS_Z1C1][JZ][2] = IO|J;
-}
 
 // output address bits and outputEnable signal using shift registers
 void setAddress(int address, bool outputEnable) {
@@ -117,9 +88,9 @@ void writeEEPROM(int address, byte data) {
 }
 
 // read and print all EEPROM addresses
-void printContents(int start, int length) {
+void printContents() {
   Serial.println("\nReading EEPROM");
-  for(int base = 0; base < length; base += 16 /*read 16 EEPROM bytes at a time*/) {
+  for(int base = 0; base <= 255; base += 16 /*read 16 EEPROM bytes at a time*/) {
     byte data[16];
     for(int offset = 0; offset <= 15; offset += 1) {
       data[offset] = readEEPROM(base + offset);
@@ -134,9 +105,14 @@ void printContents(int start, int length) {
   }
 }
 
-void setup() {
-  initUCode();
+// just printing dots to show the program hasnt hung
+void printDot(int value) {
+  if(value % 64 == 0) {
+    Serial.print(".");
+  }
+}
 
+void setup() {
   pinMode(SHIFT_DATA, OUTPUT);
   pinMode(SHIFT_CLK, OUTPUT);
   pinMode(SHIFT_LATCH, OUTPUT);
@@ -150,25 +126,19 @@ void setup() {
 
   // program the 8 high-order bits of microcode into the first 128 bytes of EEPROM
   Serial.print("\nProgramming EEPROM");
-  for(int address = 0; address < 1024; address += 1) {
-    int flags       = (address & 0b1100000000) >> 8;
-    int byte_sel    = (address & 0b0010000000) >> 7;
-    int instruction = (address & 0b0001111000) >> 3;
-    int step        = (address & 0b0000000111);
+  for(int address = 0; address < sizeof(data)/sizeof(data[0]); address += 1) {
+    writeEEPROM(address, data[address] >> 8);
+    printDot(address);
+  }
 
-    if(byte_sel) {
-      writeEEPROM(address, ucode[flags][instruction][step]);
-    } else {
-      writeEEPROM(address, ucode[flags][instruction][step] >> 8);
-    }
-    
-    if(address % 64 == 0) {
-      Serial.print(".");
-    }
+  // program the 8 low-order bits of microcode into the second 128 bytes of EEPROM
+  for(int address = 0; address < sizeof(data)/sizeof(data[0]); address += 1) {
+    writeEEPROM(address + 128, data[address]);
+    printDot(address);
   }
 
   // read and print out contents of EEPROM
-  printContents(0, 1024);
+  printContents();
 }
 
 void loop() {

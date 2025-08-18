@@ -24,6 +24,7 @@ The computer works without any code and can be manually programmed by using DIP 
 - **B Register -** The secondary register to hold the second operand for ALU operations
 - **Arithmetic Logic Unit (ALU) -** Does the addition and subtraction
 - **Instruction Register -** Stores the current instruction being executed
+- **Flags Register -** Checks for overflow or underflow values
 - **Program Counter -** Keeps track of which instruction to execute next
 
 **Memory & I/O**
@@ -37,15 +38,19 @@ The computer works without any code and can be manually programmed by using DIP 
 ## Instruction Set
 
 I've programmed a complete instruction set in the [CPU microcode](./programs/sap1_cpu_microcode/sap1_cpu_microcode.ino)
-- **NOP -** No operation
-- **LDA -** Load from memory to A register
-- **ADD -** Add memory to A register
-- **SUB -** Subtract memory from A register
-- **STA -** Store A register to memory
-- **LDI -** Load immediate value to A register
-- **JMP -** Jump to address
-- **OUT -** Output A register to display
-- **HLT -** Halt computer
+- **(0000) *NOP* -** No operation
+- **(0001) *LDA* -** Load from memory to A register
+- **(0010) *ADD* -** Add memory to A register
+- **(0011) *SUB* -** Subtract memory from A register
+- **(0100) *STA* -** Store A register to memory
+- **(0101) *LDI* -** Load immediate value to A register
+- **(0110) *JMP* -** Jump to address
+- **(0111) *JC*  -** Jump if carry (overflow)
+- **(1000) *JZ*  -** Jump if zero  (underflow)
+- **(1110) *OUT* -** Output A register to display
+- **(1111) *HLT* -** Halt computer
+
+For info on how to input the assembly program, look at [Programming](#programming)
 
 ## Operation Cycle
 
@@ -57,7 +62,19 @@ I've programmed a complete instruction set in the [CPU microcode](./programs/sap
 ## Programming
 
 **SAP-1 Programs**
-- Programs (like multiplication, Fibonacci sequence, etc.) are written in Assembly and manually entered via DIP switches into the RAM
+- Programs (like multiplication, powers of 2, etc.) are written in Assembly and manually entered via DIP switches into the RAM
+
+```text
+Manual Programming Instructions
+
+1. Switch to the memory address you want to program the instruction on
+2. Input the instruction into the first 4 bits and the number/address into the last 4 bits
+
+Examples: 
+Load number from address 15: 0001 1111
+Output:                      1110 0000
+Jump to address 3:           0110 0011
+```
 
 **Display Setup**
 - [Arduino EEPROM programmers](./programs/sap1_decimal_counter_programmer/sap1_decimal_counter_programmer.ino) are used to prepare lookup tables for decoding the 7-segment display
