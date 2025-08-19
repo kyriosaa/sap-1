@@ -1,12 +1,12 @@
 ; Displays multiples of 3
 
 LDI 3   ; Load immediate 3          00: (0000   0101 0011)
-STA 15  ; Store A in 15             01: (0001   0100 1111)
+STA 15  ; Store A in addr 15        01: (0001   0100 1111)
 LDI 0   ; Load immediate 0          02: (0010   0101 0000)
 ADD 15  ; Add 15 to register        03: (0011   0010 1111)
 OUT     ; Output                    04: (0100   1110 0000)
 JC  7   ; If carry, jump to addr 7  05: (0101   0111 0111)
-JMP 3   ; Jump to address 3         06: (0110   0110 0011)
+JMP 3   ; Jump to addr 3            06: (0110   0110 0011)
 HLT     ; Halt                      07: (0111   1111 0000)
         ;                           08: (1000            )
         ;                           09: (1001            )

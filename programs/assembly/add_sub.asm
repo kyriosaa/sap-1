@@ -1,8 +1,8 @@
 ; 3 numbers: Add first and second, then subtract with third
 
-LDA 13  ; Load address 13                   00: (0000   0001 1101)
-ADD 14  ; Add using address 14              01: (0001   0010 1110)
-SUB 15  ; Subtract using address 15         02: (0010   0011 1111)
+LDA 13  ; Load addr 13                      00: (0000   0001 1101)
+ADD 14  ; Add using addr 14                 01: (0001   0010 1110)
+SUB 15  ; Subtract using addr 15            02: (0010   0011 1111)
 OUT     ; Output                            03: (0011   1110 0000)
 HLT     ; Halt                              04: (0100   1111 0000)
         ;                                   05: (0101            )
