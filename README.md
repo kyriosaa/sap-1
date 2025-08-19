@@ -9,7 +9,10 @@
 
 SAP-1 (Simple As Possible - 1) is a fully functional 8-bit computer built entirely from scratch using basic logic chips and breadboards. My version is based on Ben Eater's design with power distribution changes along with IC placement and wiring differences.
 
-The computer works without any code and can be manually programmed by using DIP switches and Arduino code is used to program EEPROM lookup tables so numbers can be displayed properly. More complex programs such as multiplication or sequencing are written in Assembly and manually entered via DIP switches.
+The computer works without any code and can be manually programmed by using DIP switches. Arduino code is used to program EEPROM lookup tables so numbers can be displayed properly. More complex programs such as multiplication or sequencing are written in Assembly and manually entered via DIP switches.
+
+🎥 [Demo video](https://www.youtube.com/shorts/4pfi_eUA4II) // [Countdown](https://youtu.be/wu7tkiY4CAg) // [Powers of 2](https://www.youtube.com/watch?v=veCdd8PZPOk) // [Multiples of 3](https://youtu.be/clsH6ASg8Kw) 🎥
+
 
 | Sections  |
 |-----------|
@@ -17,7 +20,7 @@ The computer works without any code and can be manually programmed by using DIP 
 | 📊 [Instruction Set](#instruction-set) |
 | ⚡ [Operation Cycle](#operation-cycle) |
 | 💻 [Programming](#programming) |
-| 📸 [Images](#this-project-is-not-finished-yet-but-here-are-some-wip-images) |
+| 📸 [Images](#images) |
 
 ## Core Components
 
@@ -84,8 +87,6 @@ Jump to address 3:           0110 0011
 
 **Example Programs**
 - [Assembly examples](./programs/assembly/) are in the Assembly folder
-
-<!-- 🎥 [Watch the demo video](LINK) 🎥 -->
 
 ## Images
 
