@@ -1,6 +1,6 @@
-; Displays multiples of 3
+; Displays multiples of 8
 
-LDI 3   ; Load immediate 3          00: (0000   0101 0011)
+LDI 3   ; Load immediate 8          00: (0000   0101 1000)
 STA 15  ; Store in addr 15          01: (0001   0100 1111)
 LDI 0   ; Load immediate 0          02: (0010   0101 0000)
 ADD 15  ; Add using addr 15         03: (0011   0010 1111)
