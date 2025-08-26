@@ -44,17 +44,19 @@ The computer works without any code and can be manually programmed by using DIP 
 ## Instruction Set
 
 I've programmed a complete instruction set in the [CPU microcode](./programs/sap1_cpu_microcode/sap1_cpu_microcode.ino)
-- **(0000) *NOP* -** No operation
-- **(0001) *LDA* -** Load from memory to A register
-- **(0010) *ADD* -** Add memory to A register
-- **(0011) *SUB* -** Subtract memory from A register
-- **(0100) *STA* -** Store A register to memory
-- **(0101) *LDI* -** Load immediate value to A register
-- **(0110) *JMP* -** Jump to address
-- **(0111) *JC*  -** Jump if carry (overflow)
-- **(1000) *JZ*  -** Jump if zero  (underflow)
-- **(1110) *OUT* -** Output A register to display
-- **(1111) *HLT* -** Halt computer
+```text
+0000    NOP - No operation
+0001    LDA - Load from memory to A register
+0010    ADD - Add memory to A register
+0011    SUB - Subtract memory from A register
+0100    STA - Store A register to memory
+0101    LDI - Load immediate value to A register
+0110    JMP - Jump to address
+0111    JC  - Jump if carry (overflow)
+1000    JZ  - Jump if zero  (underflow)
+1110    OUT - Output A register to display
+1111    HLT - Halt computer
+```
 
 For info on how to input the assembly program, look at [Programming](#programming)
 
@@ -74,12 +76,14 @@ For info on how to input the assembly program, look at [Programming](#programmin
 Manual Programming Instructions
 
 1. Switch to the memory address you want to program the instruction on
-2. Input the instruction into the first 4 bits and the number/address into the last 4 bits
+2. Input the instruction opcode (first 4 bits) and the operand/target address (last 4 bits)
+3. For data storage locations, just input the 8-bit binary value directly
 
 Examples: 
 Load number from address 15: 0001 1111
 Output:                      1110 0000
 Jump to address 3:           0110 0011
+Data storage (123):          0111 1011
 ```
 
 **Display Setup**
